@@ -9,6 +9,8 @@ package {
     [
         'openjdk-7-jre',
         'git',
+        'wget',
+        'curl',
     ]:
 }
 
