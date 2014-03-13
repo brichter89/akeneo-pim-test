@@ -30,7 +30,7 @@ MYSQL
 cd /var/www/akeneo || exit_error $? 'Could not change directory'
 
 echo "=== Installing Akeneo PIM ==="
-php app/console pim:install --force --env=dev || exit_error $? 'Error while installing Akeneo'
+php app/console pim:install --no-debug --force --env=dev || exit_error $? 'Error while installing Akeneo'
 
 echo "=== Clearing cache ==="
-php app/console cache:clear --env=dev || exit_error $? ' Error while clearing cache'
+php app/console cache:clear --no-debug --env=dev || exit_error $? ' Error while clearing cache'
