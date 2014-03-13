@@ -1,10 +1,13 @@
 use_nfs = true
+hostname = 'akeneo-dev'
 
 Vagrant.configure("2") do |config|
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   config.vm.network "private_network", ip: "192.168.55.10"
+
+  config.vm.hostname = hostname
 
 
   config.vm.synced_folder "./akeneo", "/var/www/akeneo", :nfs => use_nfs
@@ -17,13 +20,14 @@ Vagrant.configure("2") do |config|
     virtualbox.customize ["setextradata", :id, "--VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
   end
 
-  config.vm.provision :shell, :path => "config/shell/initial.sh"
+  # config.vm.provision :shell, :path => "config/shell/initial.sh"
   config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "config/puppet/manifests"
     puppet.facter = {
       "ssh_username" => "vagrant",
+      "hostname" => hostname,
     }
-
-    puppet.manifests_path = "config/puppet/manifests"
+    puppet.options = ["--pluginsync", "--summarize"]
   end
 
   config.ssh.username = "vagrant"

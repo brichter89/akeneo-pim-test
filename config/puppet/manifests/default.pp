@@ -5,7 +5,12 @@ import "php.pp"
 import "mysql.pp"
 # import "oxid.pp"
 
-package { 'openjdk-7-jre': }
+package { 
+    [
+        'openjdk-7-jre',
+        'git',
+    ]:
+}
 
 file {
     "/etc/apache2/sites-available/akeneo-dev.conf":
