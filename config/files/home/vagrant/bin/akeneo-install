@@ -1,0 +1,36 @@
+#!/bin/bash
+
+appName=$(basename $0)
+
+c_default='\e[0;37m'
+c_red='\e[1;31m'
+c_yellow='\e[1;33m'
+
+error() {
+    local message="$@"
+    local line='----------------------------------------------------------------'
+    echo -e "\n${c_red}${line}\n[${appName}] ERROR: ${message}\n${line}\n${c_default}" >&2
+}
+
+exit_error() {
+    local errCode=$1
+    local errMsg="${@:2}"
+
+    error "$errMsg"
+
+    exit $1
+}
+
+mysql -u root <<-MYSQL || exit_error 1 'Error while executing SQL'
+    CREATE DATABASE IF NOT EXISTS akeneo_pim;
+    GRANT ALL PRIVILEGES ON akeneo_pim.* TO akeneo_pim@localhost IDENTIFIED BY 'akeneo_pim';
+    EXIT
+MYSQL
+
+cd /var/www/akeneo || exit_error 2 'Could not change directory'
+
+echo "=== Installing Akeneo PIM ==="
+php app/console pim:install --env=dev || exit_error 3 'Error while installing Akeneo'
+
+echo "=== Clearing cache ==="
+php app/console cache:clear --env=dev || exit_error 4 ' Error while clearing cache'
