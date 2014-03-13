@@ -11,9 +11,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.usable_port_range = (2200..2250)
   config.vm.provider :virtualbox do |virtualbox|
-    virtualbox.customize ["modifyvm", :id, "--name", "akeneo.local"]
+    virtualbox.customize ["modifyvm", :id, "--name", "akeneo-dev"]
     virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    virtualbox.customize ["modifyvm", :id, "--memory", "512"]
+    virtualbox.customize ["modifyvm", :id, "--memory", "1024"]
     virtualbox.customize ["setextradata", :id, "--VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
   end
 
@@ -21,7 +21,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision :puppet do |puppet|
     puppet.facter = {
       "ssh_username" => "vagrant",
-      'oxidZipUrl' => $oxidZipUrl
     }
 
     puppet.manifests_path = "config/puppet/manifests"

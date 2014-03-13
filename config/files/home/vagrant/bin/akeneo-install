@@ -18,19 +18,19 @@ exit_error() {
 
     error "$errMsg"
 
-    exit $1
+    exit $errCode
 }
 
-mysql -u root <<-MYSQL || exit_error 1 'Error while executing SQL'
+mysql -u root <<-MYSQL || exit_error $? 'Error while executing SQL'
     CREATE DATABASE IF NOT EXISTS akeneo_pim;
     GRANT ALL PRIVILEGES ON akeneo_pim.* TO akeneo_pim@localhost IDENTIFIED BY 'akeneo_pim';
     EXIT
 MYSQL
 
-cd /var/www/akeneo || exit_error 2 'Could not change directory'
+cd /var/www/akeneo || exit_error $? 'Could not change directory'
 
 echo "=== Installing Akeneo PIM ==="
-php app/console pim:install --env=dev || exit_error 3 'Error while installing Akeneo'
+php app/console pim:install --force --env=dev || exit_error $? 'Error while installing Akeneo'
 
 echo "=== Clearing cache ==="
-php app/console cache:clear --env=dev || exit_error 4 ' Error while clearing cache'
+php app/console cache:clear --env=dev || exit_error $? ' Error while clearing cache'

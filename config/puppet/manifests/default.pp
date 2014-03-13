@@ -15,20 +15,22 @@ file {
         group => "root",
         notify => Service["apache2"],
         ;
-    "/etc/php5/cli/php.ini":
-        source => "/vagrant/config/files/etc/php5/cli/php.ini",
+    "/etc/php5/":
+        source => "/vagrant/config/files/etc/php5/",
+        recurse => true,
         owner => "root",
         group => "root",
-        ;
-    "/etc/php5/apache2/php.ini":
-        source => "/vagrant/config/files/etc/php5/apache2/php.ini",
-        owner => "root",
-        group => "root",
+        require => Package['php5'],
         notify => Service["apache2"],
         ;
     "/home/vagrant/":
         source => "/vagrant/config/files/home/vagrant/",
         recurse => true,
+        owner => 'vagrant',
+        group => 'vagrant',
+        ;
+    "/etc/profile.d/bash_aliases.sh":
+        source => "/vagrant/config/files/etc/profile.d/bash_aliases.sh",
         owner => 'vagrant',
         group => 'vagrant',
         ;
