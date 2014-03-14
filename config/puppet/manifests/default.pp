@@ -41,6 +41,11 @@ file {
         owner => 'vagrant',
         group => 'vagrant',
         ;
+    "/etc/apt/sources.list":
+        source => "/vagrant/config/files/etc/apt/sources.list",
+        owner => 'root',
+        group => 'root',
+        ;
 }
 
 exec { 'a2dissite 000-default.conf':
