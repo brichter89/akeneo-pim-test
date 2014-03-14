@@ -7,15 +7,20 @@ vm:
         private_network: 192.168.55.10
         public_network:
             bridge: eth0
+        usable_port_range: 
+            start: 10000
+            end:   10050
+        forwarded_port:
+            -
+                host:          8000
+                guest:         80
+                auto_correct:  true
     synced_folder:
         -
             id:     vagrant-root
             source: ./akeneo
             target: /var/www/akeneo
             nfs:    true
-    usable_port_range:
-        start: 2200
-        end:   2250
 
 ssh:
     username: vagrant
