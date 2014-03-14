@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
     virtualbox.customize ["setextradata", :id, "--VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
   end
 
-  # config.vm.provision :shell, :path => "config/shell/initial.sh"
+  config.vm.provision :shell, :path => "config/shell/initial.sh"
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "config/puppet/manifests"
     puppet.facter = {
