@@ -1,0 +1,25 @@
+--- # Vagrant Config
+vm:
+    name:     Akeneo (akeneo-dev)
+    hostname: akeneo-dev
+    memory:   1024
+    network:
+        private_network: 192.168.55.10
+        public_network:
+            bridge: eth0
+    synced_folder:
+        -
+            id:     vagrant-root
+            source: ./akeneo
+            target: /var/www/akeneo
+            nfs:    true
+    usable_port_range:
+        start: 2200
+        end:   2250
+
+ssh:
+    username: vagrant
+    shell:    'bash -l'
+
+vagrant:
+    host: detect

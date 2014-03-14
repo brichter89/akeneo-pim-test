@@ -16,6 +16,7 @@ Clone repo (or fork and then clone yours):
 
     $ git clone https://github.com/brichter89/akeneo-pim-test.git
 
+Copy `<project>/config/config.yaml.dist` to `<project>/config/config.yaml` and change config values as needed in `config.yaml`. Change hostname to something unique to use it via DHCP. If you want to leave standard configuration just ignore this step. Vagrant will automatically create a local copy of `config.yaml.dist`
 
 Power on VM:
 
