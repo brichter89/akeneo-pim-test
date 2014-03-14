@@ -24,20 +24,13 @@ Power on VM:
 
 this powers on the VM and starts initial provisioning.
 
-After that, connect to VM:
+While you're waiting, download [the Akeneo PIM zip file](http://www.akeneo.com/download/) and extract the contents of `pim-community-standard-vX.X.X-XXX/` to the `akeneo` dir in your project.
+
+When provisioning is done you can ssh into the VM with
 
     $ vagrant ssh
 
-You now can either
-
-- install dependencies with composer (might be slower):
-
-        $ cd /var/www/akeneo
-        $ composer install
-
-- or (might be faster) download [the zip file](http://www.akeneo.com/download/) and extract contents of `pim-community-standard-vX.X.X-XXX/` to the `akeneo` dir in your project (just overwrite all files)
-
-Now you can install Akeneo PIM:
+and install akeneo:
 
     $ akeneo-install
 
@@ -47,6 +40,7 @@ Now you can install Akeneo PIM:
 
 ## Connect to your PIM application
 Go to http://192.168.55.10/ and login with
+or - if your DHCP supports this - use http://<hostname>/ (the hostname you have set in your `config.yaml`)
 
 - **username:** admin
 - **password:** admin
