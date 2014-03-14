@@ -12,7 +12,7 @@ vm:
             end:   10050
         forwarded_port:
             -
-                host:          8000
+                host:          8080
                 guest:         80
                 auto_correct:  true
     synced_folder:
