@@ -1,4 +1,4 @@
-Akaneo PIM Test
+Akeneo PIM Test
 ===============
 
 Environment to try out Akeneo PIM on a Vagrant VM
